@@ -1,0 +1,11 @@
+{
+  "name": "sandbox-math-tests",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.18"
+  }
+}
