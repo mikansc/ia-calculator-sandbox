@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
-const { sum, subtract, multiply, divide } = require('./math')
+const { sum, subtract, multiply, divide, exponent } = require('./src/math')
 
 describe('math functions', () => {
   it('sum adds numbers', () => {
@@ -21,5 +21,11 @@ describe('math functions', () => {
 
   it('divide throws on divide by zero', () => {
     expect(() => divide(1, 0)).toThrow('Cannot divide by zero')
+  })
+
+  it('exponent raises base to power', () => {
+    expect(exponent(2, 3)).toBe(8)
+    expect(exponent(5, 0)).toBe(1)
+    expect(exponent(9, 0.5)).toBe(3)
   })
 })
