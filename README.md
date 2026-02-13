@@ -2,6 +2,7 @@
 
 Overview
 --------
+<img width="1102" height="682" alt="image" src="https://github.com/user-attachments/assets/80cc075b-d1ac-48ee-823d-a5f5a0c0a19a" />
 
 This small web project contains a set of JavaScript modules and tests for basic math utilities and a simple 3D scene demo. It includes a tiny UI and test suite configured with Vitest and builds with Webpack.
 
