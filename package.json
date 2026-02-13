@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "type": "commonjs",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "dev": "live-server",
+    "build": "webpack",
+    "build:dev": "webpack --mode development",
+    "watch": "webpack --watch"
   },
   "devDependencies": {
-    "vitest": "^4.0.18"
+    "live-server": "^1.2.2",
+    "terser-webpack-plugin": "^5.3.16",
+    "vitest": "^4.0.18",
+    "webpack": "^5.105.2",
+    "webpack-cli": "^6.0.1"
   }
 }

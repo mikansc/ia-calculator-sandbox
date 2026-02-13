@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .calculator {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 3px solid #3a3a3a;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .brand {
+            text-align: center;
+            color: #ff6b35;
+            font-size: 14px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+
+        .display {
+            background: #1a3a1a;
+            border: 3px solid #0a0a0a;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 0, 0.03) 0px,
+                rgba(0, 255, 0, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+        }
+
+        #result {
+            font-size: 42px;
+            color: #00ff00;
+            text-align: right;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+            min-height: 50px;
+            word-wrap: break-word;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        button {
+            padding: 25px;
+            font-size: 24px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.1s;
+            box-shadow:
+                0 4px 0 rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow:
+                0 2px 0 rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .number {
+            background: linear-gradient(145deg, #4a4a4a, #3a3a3a);
+            color: #ffffff;
+        }
+
+        .number:hover {
+            background: linear-gradient(145deg, #5a5a5a, #4a4a4a);
+        }
+
+        .operator {
+            background: linear-gradient(145deg, #ff6b35, #f94c10);
+            color: #ffffff;
+        }
+
+        .operator:hover {
+            background: linear-gradient(145deg, #ff7b45, #ff5c20);
+        }
+
+        .equals {
+            background: linear-gradient(145deg, #00d9ff, #0099cc);
+            color: #ffffff;
+            grid-column: span 2;
+        }
+
+        .equals:hover {
+            background: linear-gradient(145deg, #10e9ff, #10a9dc);
+        }
+
+        .clear {
+            background: linear-gradient(145deg, #ff4444, #cc0000);
+            color: #ffffff;
+            grid-column: span 2;
+        }
+
+        .clear:hover {
+            background: linear-gradient(145deg, #ff5454, #dd1010);
+        }
+
+        .decimal {
+            background: linear-gradient(145deg, #4a4a4a, #3a3a3a);
+            color: #ffffff;
+        }
+
+        .decimal:hover {
+            background: linear-gradient(145deg, #5a5a5a, #4a4a4a);
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="brand">RETRO-CALC 80</div>
+        <div class="display">
+            <div id="result">0</div>
+        </div>
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="operator" onclick="setOperator('/')">÷</button>
+            <button class="operator" onclick="setOperator('*')">×</button>
+
+            <button class="number" onclick="appendNumber('7')">7</button>
+            <button class="number" onclick="appendNumber('8')">8</button>
+            <button class="number" onclick="appendNumber('9')">9</button>
+            <button class="operator" onclick="setOperator('-')">-</button>
+
+            <button class="number" onclick="appendNumber('4')">4</button>
+            <button class="number" onclick="appendNumber('5')">5</button>
+            <button class="number" onclick="appendNumber('6')">6</button>
+            <button class="operator" onclick="setOperator('+')">+</button>
+
+            <button class="number" onclick="appendNumber('1')">1</button>
+            <button class="number" onclick="appendNumber('2')">2</button>
+            <button class="number" onclick="appendNumber('3')">3</button>
+            <button class="equals" onclick="calculate()">=</button>
+
+            <button class="number" onclick="appendNumber('0')">0</button>
+            <button class="decimal" onclick="appendNumber('.')">.</button>
+        </div>
+    </div>
+
+    <script src="dist/bundle.js"></script>
+    <script>
+        let currentValue = '0';
+        let previousValue = null;
+        let operator = null;
+        let shouldResetDisplay = false;
+
+        function updateDisplay() {
+            document.getElementById('result').textContent = currentValue;
+        }
+
+        function clearDisplay() {
+            currentValue = '0';
+            previousValue = null;
+            operator = null;
+            shouldResetDisplay = false;
+            updateDisplay();
+        }
+
+        function appendNumber(num) {
+            if (shouldResetDisplay) {
+                currentValue = num;
+                shouldResetDisplay = false;
+            } else {
+                if (currentValue === '0' && num !== '.') {
+                    currentValue = num;
+                } else if (num === '.' && currentValue.includes('.')) {
+                    return;
+                } else {
+                    currentValue += num;
+                }
+            }
+            updateDisplay();
+        }
+
+        function setOperator(op) {
+            if (operator !== null && !shouldResetDisplay) {
+                calculate();
+            }
+            previousValue = parseFloat(currentValue);
+            operator = op;
+            shouldResetDisplay = true;
+        }
+
+        function calculate() {
+            if (operator === null || previousValue === null) {
+                return;
+            }
+
+            const current = parseFloat(currentValue);
+            let result;
+
+            try {
+                switch (operator) {
+                    case '+':
+                        result = sum(previousValue, current);
+                        break;
+                    case '-':
+                        result = subtract(previousValue, current);
+                        break;
+                    case '*':
+                        result = multiply(previousValue, current);
+                        break;
+                    case '/':
+                        result = divide(previousValue, current);
+                        break;
+                }
+
+                currentValue = result.toString();
+                operator = null;
+                previousValue = null;
+                shouldResetDisplay = true;
+                updateDisplay();
+            } catch (error) {
+                currentValue = 'ERROR';
+                updateDisplay();
+                setTimeout(clearDisplay, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
