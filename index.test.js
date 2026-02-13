@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const indexModule = require('./src/index');
+const indexModule = require('./src/js/index');
 
 describe('index.js exports', () => {
   it('exports math functions', () => {
@@ -30,9 +30,9 @@ describe('index.js browser wiring', () => {
 
     // Re-require after monkey-patching to trigger the side effect
     // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-    delete require.cache[require.resolve('./src/index')];
+    delete require.cache[require.resolve('./src/js/index')];
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    require('./src/index');
+    require('./src/js/index');
 
     expect(typeof handler).toBe('function');
 

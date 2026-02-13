@@ -5,6 +5,13 @@ const { attach3DRotation } = require('./scene3d.js');
 // Import calculator UI logic (wires up DOM handlers) and styles
 if (typeof window !== 'undefined') {
   require('./calculator-ui.js');
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const calculatorElement = document.querySelector('.calculator');
+    if (calculatorElement) {
+      attach3DRotation({ calculatorElement, dragElement: document.body });
+    }
+  });
 }
 
 if (typeof document !== 'undefined') {
