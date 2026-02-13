@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
-const { sum, subtract, multiply, divide, exponent } = require('./src/js/math')
+const { sum, subtract, multiply, divide, exponent } = require('./math')
 
 describe('math functions', () => {
   it('sum adds numbers', () => {

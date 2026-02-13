@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 // Require CommonJS module
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { attach3DRotation, clamp } = require('./src/js/scene3d');
+const { attach3DRotation, clamp } = require('./scene3d');
 
 describe('clamp', () => {
   it('returns value within range', () => {

@@ -15,25 +15,25 @@ Quick Start
 1. Install dependencies:
 
 ```bash
-npm install
+yarn install
 ```
 
 2. Run a local static server (fast preview):
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 3. Start Webpack dev server:
 
 ```bash
-npm start
+yarn start
 ```
 
 4. Run tests:
 
 ```bash
-npm test
+yarn test
 ```
 
 Build
@@ -42,21 +42,44 @@ Build
 Create a production build with:
 
 ```bash
-npm run build
+yarn build
 ```
 
 For a development build:
 
 ```bash
-npm run build:dev
+yarn build:dev
 ```
+
+Bundle Analysis
+---------------
+
+The production build demonstrates Webpack's optimization capabilities:
+
+**Output Files:**
+- `bundle.js`: 2.86 KiB (minified)
+- `bundle.js.map`: 12 KiB (source map)
+- `styles.css`: 5.55 KiB
+- `styles.css.map`: 7.6 KiB (source map)
+- `index.html`: 1.62 KiB
+
+**Total bundle size:** 8.42 KiB (excluding source maps)
+**Total with source maps:** 19.7 KiB
+
+**Optimization Effects:**
+- JavaScript modules (6.15 KiB source) → 2.86 KiB bundled (**~53% size reduction**)
+- Code minification and tree-shaking applied
+- Source maps generated for debugging production builds
+- CSS processed with PostCSS and optimized
+
+The bundler combines multiple JavaScript modules (index.js, math.js, scene3d.js, calculator-ui.js) into a single optimized bundle with dead code elimination and minification.
 
 Deployment
 ----------
 
 The project builds static assets into the Webpack output directory. To deploy:
 
-- Run `npm run build` to produce optimized assets.
+- Run `yarn build` to produce optimized assets.
 - Upload the resulting files (the Webpack output directory) to your static host (Netlify, Vercel, Surge, GitHub Pages, S3, etc.).
 
 If you use GitHub Pages, you can deploy the build directory using a small deployment script or the `gh-pages` package.
