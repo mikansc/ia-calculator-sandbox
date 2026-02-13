@@ -1,10 +1,10 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
-  entry: './src/index.js',
+  entry: './src/js/index.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -38,6 +38,17 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'styles.css',
     }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+    }),
   ],
   devtool: 'source-map', // Generate source maps for debugging
+  devServer: {
+    static: path.resolve(__dirname, 'dist'),
+    port: 8080,
+    open: true,
+    hot: true,
+    watchFiles: ['src/**/*'],
+  },
 };
