@@ -10,6 +10,7 @@
     "watch": "webpack --watch"
   },
   "devDependencies": {
+    "jsdom": "^28.0.0",
     "live-server": "^1.2.2",
     "terser-webpack-plugin": "^5.3.16",
     "vitest": "^4.0.18",
